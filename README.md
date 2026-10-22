@@ -29,6 +29,8 @@ eval infra on their team.
 - `mock_server.py` - local mock of the API shapes for offline tests and demos.
 - `run_live.py` - runs the probe set against the real API, writes a JSON
   report to `reports/`.
+- `run_agent.py` - runs the research agent once and prints the sourced
+  answer plus the per-step trace.
 
 ## Run it
 
@@ -37,6 +39,7 @@ python3 -m venv venv && venv/bin/pip install -r requirements.txt
 venv/bin/python -m pytest tests/ -q        # 12 tests, against the mock + unit level
 export CONTEXT_DEV_API_KEY=<free key>      # free tier, no card
 venv/bin/python run_live.py                # ~9 calls, JSON report in reports/
+venv/bin/python run_agent.py               # one research question, answer + trace
 ```
 
 ## Verified facts
