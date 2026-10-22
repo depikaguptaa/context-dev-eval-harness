@@ -1,0 +1,6 @@
+# yc-contextdev: Context.dev eval harness + research agent
+# Install into a venv: python3 -m venv venv && venv/bin/pip install -r requirements.txt
+requests>=2.31
+pyyaml>=6.0
+langgraph>=0.2
+pytest>=8.0

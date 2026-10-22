@@ -1,0 +1,93 @@
+# Extraction-quality probe set for Context.dev.
+#
+# Each probe is a hypothesis to check on a LIVE run (needs CONTEXT_DEV_API_KEY).
+# Nothing here asserts a conclusion about the API; the harness records what
+# actually happens and the eval report is filled in from real results.
+#
+# Cost estimate per full live run at documented pricing: ~7 scrapes (1 credit
+# each) + 2 searches (1 credit per 10 results) = under 10 credits of the
+# free tier.
+
+probes:
+  # --- English baselines (sanity: these should pass on any working scraper) ---
+  - id: baseline-en-docs
+    operation: scrape
+    target: https://example.com
+    expect:
+      min_chars: 20
+    notes: Control probe. If this fails, the harness or key is broken, not the page.
+
+  - id: baseline-en-js-spa
+    operation: scrape
+    target: https://react.dev
+    expect:
+      min_chars: 500
+    notes: JS-heavy docs SPA. Context.dev renders every request in a real browser
+      per their homepage, so this tests that claim on a React-rendered page.
+
+  # --- Indic-language pages (the wedge: extraction quality in non-Latin scripts) ---
+  - id: hindi-news-bbc
+    operation: scrape
+    target: https://www.bbc.com/hindi
+    expect:
+      min_chars: 300
+      script: devanagari
+      min_script_chars: 100
+    notes: Hindi front page. Some scrapers return English chrome or
+      transliterated stubs, so this checks for real Devanagari body text.
+
+  - id: hindi-news-jagran
+    operation: scrape
+    target: https://www.jagran.com
+    expect:
+      min_chars: 300
+      script: devanagari
+      min_script_chars: 100
+    notes: High-traffic Hindi daily with heavy ad/JS chrome. Tests mainContentOnly
+      filtering on a noisy Indic page.
+
+  - id: tamil-news-dailythanthi
+    operation: scrape
+    target: https://www.dailythanthi.com
+    expect:
+      min_chars: 300
+      script: tamil
+      min_script_chars: 100
+    notes: Tamil daily. Same hypothesis as the Hindi probes, different script.
+
+  - id: india-govt-pib
+    operation: scrape
+    target: https://pib.gov.in
+    expect:
+      min_chars: 300
+    notes: Press Information Bureau. Indian govt portals are often JS-heavy with
+      unusual markup; a realistic RAG-grounding target for India-focused agents.
+
+  # --- Search quality probes ---
+  - id: search-en-baseline
+    operation: search
+    target: AI agent web scraping API pricing 2026
+    num_results: 10
+    expect:
+      min_results: 5
+    notes: Baseline search probe.
+
+  - id: search-india-localized
+    operation: search
+    target: UPI autopay RBI circular site:pib.gov.in
+    num_results: 10
+    expect:
+      min_results: 3
+    notes: India-localized query with a site-restricted operator. Tests operator handling
+      plus freshness on Indian regulatory content.
+
+  # --- Failure-mode probe (exercises the harness, not the API) ---
+  - id: scrape-404-page
+    operation: scrape
+    target: https://example.com/this-page-does-not-exist-xyz
+    expect:
+      min_chars: 0
+      error_code: NOT_FOUND
+    notes: Expects the API's documented failure semantics (404s are billed at
+      base price per the FAQ; outputs carry success=false with error_code).
+      Records how cleanly the failure surfaces.
