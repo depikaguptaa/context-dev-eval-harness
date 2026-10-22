@@ -44,14 +44,8 @@ venv/bin/python run_agent.py               # one research question, answer + tra
 
 ## Verified facts
 
-- Context.dev, YC S26, raised a $9M seed led by General Catalyst, announced
-  by founder Yahia Bakour on 2026-10-19 (company blog, Dealroom, Runtimewire).
 - API base https://api.context.dev/v1; endpoints /web/scrape, /web/search,
   /web/answers; request shapes verified against their public docs.
-- No jobs posted on their YC page as of 2026-10-21
-  (ycombinator.com/companies/contextdev/jobs).
-- Founder contact published on the YC page: yahia@context.dev and
-  https://link.context.dev/chat.
 
 ## Live results (2026-10-22)
 
