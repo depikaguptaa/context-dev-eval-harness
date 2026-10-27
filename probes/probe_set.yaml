@@ -4,8 +4,8 @@
 # Nothing here asserts a conclusion about the API; the harness records what
 # actually happens and the eval report is filled in from real results.
 #
-# Cost estimate per full live run at documented pricing: ~7 scrapes (1 credit
-# each) + 2 searches (1 credit per 10 results) = under 10 credits of the
+# Cost estimate per full live run at documented pricing: ~13 scrapes (1 credit
+# each) + 3 searches (1 credit per 10 results) = under 20 credits of the
 # free tier.
 
 probes:
@@ -91,3 +91,72 @@ probes:
     notes: Expects the API's documented failure semantics (404s are billed at
       base price per the FAQ; outputs carry success=false with error_code).
       Records how cleanly the failure surfaces.
+
+  # --- Extended probes, added 2026-10-27: more scripts, JS rendering,
+  # long pages, mixed script, non-English search, walled surfaces ---
+  - id: bengali-news-anandabazar
+    operation: scrape
+    target: https://www.anandabazar.com/
+    expect:
+      min_chars: 300
+      script: bengali
+      min_script_chars: 100
+    notes: Bengali daily. Same hypothesis as the Hindi/Tamil probes,
+      third script family.
+
+  - id: telugu-news-eenadu
+    operation: scrape
+    target: https://www.eenadu.net/
+    expect:
+      min_chars: 300
+      script: telugu
+      min_script_chars: 100
+    notes: Telugu daily. Same hypothesis, fourth script family.
+
+  - id: js-rendered-quotes
+    operation: scrape
+    target: https://quotes.toscrape.com/js/
+    expect:
+      min_chars: 100
+    notes: The quotes on this page exist only after JavaScript execution.
+      react.dev tests a JS docs SPA; this tests content that is absent
+      from the raw HTML entirely.
+
+  - id: long-form-wikipedia
+    operation: scrape
+    target: https://en.wikipedia.org/wiki/India
+    expect:
+      min_chars: 5000
+    notes: Long, dense article. Tests completeness and mainContentOnly on
+      a big page, and records latency and credits at that size.
+
+  - id: mixed-script-wikipedia
+    operation: scrape
+    target: https://en.wikipedia.org/wiki/Hindi
+    expect:
+      min_chars: 500
+      script: devanagari
+      min_script_chars: 50
+    notes: English article studded with Devanagari terms. Checks the
+      script bits survive instead of being transliterated or dropped
+      when the surrounding text is English.
+
+  - id: search-hindi-query
+    operation: search
+    target: मुंबई लोकल ट्रेन समय सारणी
+    num_results: 10
+    languages: ["hi"]
+    expect:
+      min_results: 3
+    notes: Non-English query with the languages parameter. Tests search
+      quality when the query itself is in Devanagari.
+
+  - id: login-wall-x-home
+    operation: scrape
+    target: https://x.com/home
+    expect:
+      max_chars: 2000
+      allow_error: true
+    notes: Login-walled surface. The API must fail honestly (an error or
+      an unsuccessful output) or return only the wall. A full page of
+      content here would be a finding to report, not a pass.

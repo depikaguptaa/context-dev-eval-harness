@@ -24,8 +24,10 @@ eval infra on their team.
   with no LLM key.
 - `src/context_eval/probes.py` - probe runner. Expectations are hypotheses,
   checked against real responses, never asserted conclusions.
-- `probes/probe_set.yaml` - 9 live probes: English baselines, Indic script
-  coverage, localized search, one failure-mode probe.
+- `probes/probe_set.yaml` - 16 live probes: English baselines, Indic script
+  coverage (Hindi, Tamil, Bengali, Telugu), localized search, JS-rendered
+  content, long-form completeness, mixed-script pages, one failure-mode
+  probe, one login-wall probe.
 - `mock_server.py` - local mock of the API shapes for offline tests and demos.
 - `run_live.py` - runs the probe set against the real API, writes a JSON
   report to `reports/`.
@@ -36,9 +38,9 @@ eval infra on their team.
 
 ```bash
 python3 -m venv venv && venv/bin/pip install -r requirements.txt
-venv/bin/python -m pytest tests/ -q        # 12 tests, against the mock + unit level
+venv/bin/python -m pytest tests/ -q        # 20 tests, against the mock + unit level
 export CONTEXT_DEV_API_KEY=<free key>      # free tier, no card
-venv/bin/python run_live.py                # ~9 calls, JSON report in reports/
+venv/bin/python run_live.py                # ~16 calls, JSON report in reports/
 venv/bin/python run_agent.py               # one research question, answer + trace
 ```
 
@@ -55,6 +57,20 @@ venv/bin/python run_agent.py               # one research question, answer + tra
   contract (an output with success=false and error_code NOT_FOUND).
 - The research agent was also run live end to end: 1 search, 3 page reads,
   an extractive answer with sources, 4 credits, full trace recorded.
+
+## Live results, extended probe set (2026-10-27)
+
+- Full set run against the real API: 16/16 probes passed, 16 credits.
+  The 7 new probes, with diagnostics from a second targeted run:
+  Bengali front page came back with 8,371 Bengali chars; Telugu with
+  3,847 Telugu chars; the JS-only quotes page returned real quote
+  content (1,525 chars), so the browser rendering claim holds for
+  content absent from raw HTML; the long India article came back
+  complete at 612,713 chars for 1 credit; the mixed-script Hindi
+  article kept 861 Devanagari chars inside English text; the Hindi
+  search returned 10/10 relevant results; the X login wall returned
+  only the wall itself (626 chars), no fabricated feed.
+- Total live spend across all runs so far: 45 credits.
 
 ## Honest gaps
 
