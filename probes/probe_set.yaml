@@ -3,7 +3,6 @@
 # Each probe is a hypothesis to check on a LIVE run (needs CONTEXT_DEV_API_KEY).
 # Nothing here asserts a conclusion about the API; the harness records what
 # actually happens and the eval report is filled in from real results.
-#
 # Cost estimate per full live run at documented pricing: ~13 scrapes (1 credit
 # each) + 3 searches (1 credit per 10 results) = under 20 credits of the
 # free tier.
