@@ -1,0 +1,289 @@
+{
+  "results": [
+    {
+      "id": "baseline-en-docs",
+      "ok": true,
+      "failures": [],
+      "latency_ms": 1185.3,
+      "credits": 1
+    },
+    {
+      "id": "baseline-en-js-spa",
+      "ok": true,
+      "failures": [],
+      "latency_ms": 725.7,
+      "credits": 1
+    },
+    {
+      "id": "hindi-news-bbc",
+      "ok": true,
+      "failures": [],
+      "latency_ms": 1015.2,
+      "credits": 1
+    },
+    {
+      "id": "hindi-news-jagran",
+      "ok": true,
+      "failures": [],
+      "latency_ms": 2478.3,
+      "credits": 1
+    },
+    {
+      "id": "tamil-news-dailythanthi",
+      "ok": true,
+      "failures": [],
+      "latency_ms": 2170.8,
+      "credits": 1
+    },
+    {
+      "id": "india-govt-pib",
+      "ok": true,
+      "failures": [],
+      "latency_ms": 7853.4,
+      "credits": 1
+    },
+    {
+      "id": "search-en-baseline",
+      "ok": true,
+      "failures": [],
+      "latency_ms": 976.6,
+      "credits": 1
+    },
+    {
+      "id": "search-india-localized",
+      "ok": true,
+      "failures": [],
+      "latency_ms": 938.0,
+      "credits": 1
+    },
+    {
+      "id": "scrape-404-page",
+      "ok": true,
+      "failures": [],
+      "latency_ms": 1441.6,
+      "credits": 1
+    },
+    {
+      "id": "bengali-news-anandabazar",
+      "ok": true,
+      "failures": [],
+      "latency_ms": 1434.7,
+      "credits": 1
+    },
+    {
+      "id": "telugu-news-eenadu",
+      "ok": true,
+      "failures": [],
+      "latency_ms": 6595.9,
+      "credits": 1
+    },
+    {
+      "id": "js-rendered-quotes",
+      "ok": true,
+      "failures": [],
+      "latency_ms": 1929.3,
+      "credits": 1
+    },
+    {
+      "id": "long-form-wikipedia",
+      "ok": true,
+      "failures": [],
+      "latency_ms": 1386.0,
+      "credits": 1
+    },
+    {
+      "id": "mixed-script-wikipedia",
+      "ok": true,
+      "failures": [],
+      "latency_ms": 1097.9,
+      "credits": 1
+    },
+    {
+      "id": "search-hindi-query",
+      "ok": true,
+      "failures": [],
+      "latency_ms": 1199.8,
+      "credits": 1
+    },
+    {
+      "id": "login-wall-x-home",
+      "ok": true,
+      "failures": [],
+      "latency_ms": 2622.4,
+      "credits": 1
+    }
+  ],
+  "summary": {
+    "calls": 16,
+    "ok": 16,
+    "failed": 0,
+    "credits_charged": 16,
+    "avg_latency_ms": 2190.7,
+    "by_operation": {
+      "scrape": 13,
+      "search": 3
+    }
+  },
+  "trace": [
+    {
+      "ts": "2026-10-27T09:30:24+0000",
+      "operation": "scrape",
+      "target": "https://example.com",
+      "latency_ms": 1185.3,
+      "status": 200,
+      "credits": 1,
+      "ok": true,
+      "notes": "all expectations met"
+    },
+    {
+      "ts": "2026-10-27T09:30:24+0000",
+      "operation": "scrape",
+      "target": "https://react.dev",
+      "latency_ms": 725.7,
+      "status": 200,
+      "credits": 1,
+      "ok": true,
+      "notes": "all expectations met"
+    },
+    {
+      "ts": "2026-10-27T09:30:25+0000",
+      "operation": "scrape",
+      "target": "https://www.bbc.com/hindi",
+      "latency_ms": 1015.2,
+      "status": 200,
+      "credits": 1,
+      "ok": true,
+      "notes": "all expectations met"
+    },
+    {
+      "ts": "2026-10-27T09:30:28+0000",
+      "operation": "scrape",
+      "target": "https://www.jagran.com",
+      "latency_ms": 2478.3,
+      "status": 200,
+      "credits": 1,
+      "ok": true,
+      "notes": "all expectations met"
+    },
+    {
+      "ts": "2026-10-27T09:30:30+0000",
+      "operation": "scrape",
+      "target": "https://www.dailythanthi.com",
+      "latency_ms": 2170.8,
+      "status": 200,
+      "credits": 1,
+      "ok": true,
+      "notes": "all expectations met"
+    },
+    {
+      "ts": "2026-10-27T09:30:38+0000",
+      "operation": "scrape",
+      "target": "https://pib.gov.in",
+      "latency_ms": 7853.4,
+      "status": 200,
+      "credits": 1,
+      "ok": true,
+      "notes": "all expectations met"
+    },
+    {
+      "ts": "2026-10-27T09:30:39+0000",
+      "operation": "search",
+      "target": "AI agent web scraping API pricing 2026",
+      "latency_ms": 976.6,
+      "status": 200,
+      "credits": 1,
+      "ok": true,
+      "notes": "all expectations met"
+    },
+    {
+      "ts": "2026-10-27T09:30:40+0000",
+      "operation": "search",
+      "target": "UPI autopay RBI circular site:pib.gov.in",
+      "latency_ms": 938.0,
+      "status": 200,
+      "credits": 1,
+      "ok": true,
+      "notes": "all expectations met"
+    },
+    {
+      "ts": "2026-10-27T09:30:41+0000",
+      "operation": "scrape",
+      "target": "https://example.com/this-page-does-not-exist-xyz",
+      "latency_ms": 1441.6,
+      "status": 200,
+      "credits": 1,
+      "ok": true,
+      "notes": "all expectations met"
+    },
+    {
+      "ts": "2026-10-27T09:30:43+0000",
+      "operation": "scrape",
+      "target": "https://www.anandabazar.com/",
+      "latency_ms": 1434.7,
+      "status": 200,
+      "credits": 1,
+      "ok": true,
+      "notes": "all expectations met"
+    },
+    {
+      "ts": "2026-10-27T09:30:49+0000",
+      "operation": "scrape",
+      "target": "https://www.eenadu.net/",
+      "latency_ms": 6595.9,
+      "status": 200,
+      "credits": 1,
+      "ok": true,
+      "notes": "all expectations met"
+    },
+    {
+      "ts": "2026-10-27T09:30:51+0000",
+      "operation": "scrape",
+      "target": "https://quotes.toscrape.com/js/",
+      "latency_ms": 1929.3,
+      "status": 200,
+      "credits": 1,
+      "ok": true,
+      "notes": "all expectations met"
+    },
+    {
+      "ts": "2026-10-27T09:30:53+0000",
+      "operation": "scrape",
+      "target": "https://en.wikipedia.org/wiki/India",
+      "latency_ms": 1386.0,
+      "status": 200,
+      "credits": 1,
+      "ok": true,
+      "notes": "all expectations met"
+    },
+    {
+      "ts": "2026-10-27T09:30:54+0000",
+      "operation": "scrape",
+      "target": "https://en.wikipedia.org/wiki/Hindi",
+      "latency_ms": 1097.9,
+      "status": 200,
+      "credits": 1,
+      "ok": true,
+      "notes": "all expectations met"
+    },
+    {
+      "ts": "2026-10-27T09:30:55+0000",
+      "operation": "search",
+      "target": "मुंबई लोकल ट्रेन समय सारणी",
+      "latency_ms": 1199.8,
+      "status": 200,
+      "credits": 1,
+      "ok": true,
+      "notes": "all expectations met"
+    },
+    {
+      "ts": "2026-10-27T09:30:58+0000",
+      "operation": "scrape",
+      "target": "https://x.com/home",
+      "latency_ms": 2622.4,
+      "status": 200,
+      "credits": 1,
+      "ok": true,
+      "notes": "all expectations met"
+    }
+  ]
+}
